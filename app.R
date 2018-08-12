@@ -83,7 +83,13 @@ server <- function(input, output, session) {
        
      output$most_similar <- renderUI({
        if (nrow(userdata) == 0) {
-         p('Sorry, the nickname is not in the database.')
+         tagList(
+           p('Sorry, the nickname is not in the database.',
+             'Add yourself to the list by following the instructions in:'),
+           p(a('https://ideas.repec.org/i/etwitter.html',
+               href = 'https://ideas.repec.org/i/etwitter.html')),
+           p('Then, when the database is rebuilt, you should appear here.')
+         )
        } else {
          tagList(
            p('Your most similar user according to', classif, 'is',
