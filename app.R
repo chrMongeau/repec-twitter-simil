@@ -38,10 +38,12 @@ ui <- function(request) {
 server <- function(input, output, session) {
   
   observeEvent(input$show, {
+    nickname <- sub('@', '', input$screen_name)
+
     myurl <-
       paste0(
         'https://io.mongeau.net/repec-twitter-simil/?_inputs_&screen_name="',
-        input$screen_name, '"&classification="', input$classification,
+        nickname, '"&classification="', input$classification,
         '"&country="', input$country, '"&gender="', input$gender, '"&go="1"')
 
     showModal(modalDialog(
@@ -56,10 +58,12 @@ server <- function(input, output, session) {
   
   observeEvent(input$go, {
     classif <- input$classification
+
+     nickname <- sub('@', '', input$screen_name)
     
      userdata <-
        db[[tolower(input$classification)]] %>%
-       filter(tolower(user) == tolower(input$screen_name)) %>%
+       filter(tolower(user) == tolower(nickname)) %>%
        arrange(desc(weight))
      
      if (input$gender != 'All') {
