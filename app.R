@@ -42,9 +42,10 @@ server <- function(input, output, session) {
 
     myurl <-
       paste0(
-        'https://io.mongeau.net/repec-twitter-simil/?_inputs_&screen_name="',
-        nickname, '"&classification="', input$classification,
-        '"&country="', input$country, '"&gender="', input$gender, '"&go="1"')
+        'https://io.mongeau.net/repec-twitter-simil/?_inputs_&screen_name=%22',
+        nickname, '%22&classification=%22', input$classification,
+        '%22&country=%22', input$country, '%22&gender=%22', input$gender,
+        '%22&go=%221%22')
 
     showModal(modalDialog(
       title = 'To bookmark this page copy the following link:',
